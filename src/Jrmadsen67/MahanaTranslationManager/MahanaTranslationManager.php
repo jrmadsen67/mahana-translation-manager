@@ -13,7 +13,8 @@ class MahanaTranslationManager{
 
 	public function getValue($key, $lang_code)
 	{
-		return $this->translation_manager_repo->getValue($key, $lang_code);
+		$t = $this->translation_manager_repo->getValue($key, $lang_code);
+		return (empty($t)) ? '': $t->value;
 	}
 	public function getLanguageSet($lang_code)
 	{
