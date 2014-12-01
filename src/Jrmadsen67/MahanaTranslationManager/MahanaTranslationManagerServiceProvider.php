@@ -28,6 +28,10 @@ class MahanaTranslationManagerServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
+        $this->app['mahana_translation_manager'] = function () {
+            return new \Jrmadsen67\MahanaTranslationManager\MahanaTranslationManager;
+        };
+		
 		$this->app->bind('Jrmadsen67\MahanaTranslationManager\repositories\TranslationManagerRepositoryInterface', 
 			'Jrmadsen67\MahanaTranslationManager\repositories\TranslationManagerEloquentRepository');
 
