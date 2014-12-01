@@ -1,8 +1,8 @@
-<?php namespace Jrmadsen67\MahanaTranslator;
+<?php namespace Jrmadsen67\MahanaTranslationManager;
 
 use Illuminate\Support\ServiceProvider;
 
-class MahanaTranslatorServiceProvider extends ServiceProvider {
+class MahanaTranslationManagerServiceProvider extends ServiceProvider {
 
 	/**
 	 * Indicates if loading of the provider is deferred.
@@ -18,7 +18,7 @@ class MahanaTranslatorServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		$this->package('jrmadsen67/mahana-translator');
+		$this->package('jrmadsen67/mahana-translation-manager');
 	}
 
 	/**
@@ -28,7 +28,9 @@ class MahanaTranslatorServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		//
+		$this->app->bind('Jrmadsen67\MahanaTranslationManager\repositories\TranslationManagerRepositoryInterface', 
+			'Jrmadsen67\MahanaTranslationManager\repositories\TranslationManagerEloquentRepository');
+
 	}
 
 	/**
@@ -38,7 +40,7 @@ class MahanaTranslatorServiceProvider extends ServiceProvider {
 	 */
 	public function provides()
 	{
-		return array();
+		return array('mahana-translation-manager');
 	}
 
 }
