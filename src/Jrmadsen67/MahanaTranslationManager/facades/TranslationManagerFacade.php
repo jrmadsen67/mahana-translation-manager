@@ -13,6 +13,6 @@ class TranslationManagerFacade extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'mahana-translation-manager';
+        return 'mahana_translation_manager';
     }
 }
