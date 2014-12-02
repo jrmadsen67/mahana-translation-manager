@@ -6,10 +6,35 @@ use Config;
 
 class TranslationManagerEloquentRepository implements TranslationManagerRepositoryInterface
 {
+	public function find($key, $lang_code)
+	{
+		return Translations::whereKey($key)->whereLangCode($lang_code)->first();
+	}
+	public function create($data)
+	{
+		return Translations::create($data);
+	}
+	public function update($key, $lang_code, $data)
+	{
+		$translation = self::getValue($key, $lang_code);
+		$translation->fill($data);
+		$translation->save();
+
+		return Translations::whereLangCode($lang_code)->update(array('requires_update' => 1));
+	}
+
+	public function delete($key, $lang_code)
+	{
+		$translation = self::getValue($key, $lang_code);
+		$translation->delete();
+
+		return true;
+	}
+
 
 	public function getValue($key, $lang_code)
 	{
-		return Translations::whereKey($key)->whereLangCode($lang_code)->first();
+		return self::find($key, $lang_code);
 	}
 	public function getLanguageSet($lang_code)
 	{
@@ -27,16 +52,6 @@ class TranslationManagerEloquentRepository implements TranslationManagerReposito
 	{
 		return Translations::whereLangCode($lang_code)->whereRequireManualTranslation(1)->get();
 	}
-	public function updateValue($key, $lang_code, $data, $cascade = true)
-	{
-		$translation = self::getValue($key, $lang_code);
-		$translation->fill($data);
-		$translation->save();
-
-		return Translations::whereLangCode($lang_code)->update(array('requires_update' => 1));
-
-	} 
-
 
 
 }	
