@@ -11,6 +11,19 @@ class MahanaTranslationManager{
 		$this->translation_manager_repo = $translation_manager_repo;
 	}
 
+	public function find($key, $lang_code){
+		return $this->translation_manager_repo->find($key, $lang_code);
+	}
+	public function create($data){
+		return $this->translation_manager_repo->create($data);
+	}
+	public function update($key, $lang_code, $data){
+		return $this->translation_manager_repo->update($key, $lang_code, $data, $cascade);
+	}
+	public function delete($key, $lang_code){
+		return $this->translation_manager_repo->delete($key, $lang_code);
+	}
+
 	public function getValue($key, $lang_code)
 	{
 		$t = $this->translation_manager_repo->getValue($key, $lang_code);
@@ -32,8 +45,5 @@ class MahanaTranslationManager{
 	{
 		return $this->translation_manager_repo->getNeedManualtranslation($lang_code);
 	}
-	public function updateValue($key, $lang_code, $data, $cascade)
-	{
-		return $this->translation_manager_repo->updateValue($key, $lang_code, $data, $cascade);
-	} 		
+		
 } 

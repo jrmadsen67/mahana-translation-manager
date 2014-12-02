@@ -14,13 +14,18 @@ class TranslationManagerEloquentRepository implements TranslationManagerReposito
 	{
 		return Translations::create($data);
 	}
-	public function update($key, $lang_code, $data)
+	public function update($key, $lang_code, $data, $cascade)
 	{
 		$translation = self::getValue($key, $lang_code);
 		$translation->fill($data);
 		$translation->save();
 
-		return Translations::whereLangCode($lang_code)->update(array('requires_update' => 1));
+		if ($cascade)
+		{
+			return Translations::whereLangCode($lang_code)->update(array('requires_update' => 1));
+		}	
+
+		return true;
 	}
 
 	public function delete($key, $lang_code)
