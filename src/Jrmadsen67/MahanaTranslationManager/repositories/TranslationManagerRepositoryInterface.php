@@ -6,7 +6,7 @@ interface TranslationManagerRepositoryInterface
 {
 	public function find($key, $lang_code);
 	public function create($data);
-	public function update($key, $lang_code, $data);
+	public function update($key, $lang_code, $data, $cascade);
 	public function delete($key, $lang_code);
 
 	public function getValue($key, $lang_code);
