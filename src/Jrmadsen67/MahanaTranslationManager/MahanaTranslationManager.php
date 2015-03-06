@@ -18,6 +18,7 @@ class MahanaTranslationManager{
 		return $this->translation_manager_repo->create($data);
 	}
 	public function update($key, $lang_code, $data){
+		$cascade = (isset($data['cascade']))? $data['cascade']:true;
 		return $this->translation_manager_repo->update($key, $lang_code, $data, $cascade);
 	}
 	public function delete($key, $lang_code){
