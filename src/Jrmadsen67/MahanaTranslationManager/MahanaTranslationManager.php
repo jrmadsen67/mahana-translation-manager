@@ -25,8 +25,9 @@ class MahanaTranslationManager{
 		return $this->translation_manager_repo->delete($key, $lang_code);
 	}
 
-	public function getValue($key, $lang_code)
+	public function getValue($key, $lang_code ='')
 	{
+		$lang_code = (empty($lang_code))? \Config::get('mahana-translation-manager::translation_manager.default_lang'): $lang_code;
 		$t = $this->translation_manager_repo->getValue($key, $lang_code);
 		return (empty($t)) ? '': $t->value;
 	}
